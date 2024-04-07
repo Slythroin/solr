@@ -1,0 +1,19 @@
+---
+- name: Download Solr
+  get_url:
+    url: "http://archive.apache.org/dist/lucene/solr/8.8.2/solr-8.8.2.tgz"
+    dest: "/tmp/solr-8.8.2.tgz"
+
+- name: Extract Solr
+  unarchive:
+    src: "/tmp/solr-8.8.2.tgz"
+    dest: "/opt"
+    remote_src: yes
+
+- name: Install Solr
+  command:
+    cmd: "/opt/solr-8.8.2/bin/install_solr_service.sh /tmp/solr-8.8.2.tgz"
+    creates: "/etc/init.d/solr"
+#  notify: 
+#    - check for solr
+#    - report solr
