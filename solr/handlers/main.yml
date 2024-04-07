@@ -1,0 +1,11 @@
+---
+- name: check for solr
+  ansible.builtin.package_facts:
+    manager: auto
+  register: ansible_facts
+
+- name: report solr
+  debug:
+    msg: "Solr is installed"
+  when: "'solr' in ansible_facts.packages"
+
